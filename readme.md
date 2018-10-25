@@ -1,18 +1,18 @@
-# Frontend boilerplate with gulp, browserify and less
+# Instagram slider style indicators
 
-This is configured package.json with gulp, browserify and less dependecies.
+This is standalone module of slider indicators.
 
-For JavaScript compilation is used browserify. Entry point for app is assets/js/app.js
+Usage
 
-For css is less. Entry point is assets/less/app.less
+`let indicators = new instagramSliderStyleIndicator(document.querySelector('.indicator'), 8);`
+`// Set active item. Zero based index`
+`indicators.setActive(4)`
 
-Gulp default task runs javascript and less watch. Watchify is used to watch javascript files.
+`// Next`
+`indicators.next()`
 
-Javascript and less errors is handled by apropriate events on browserify and less modules
+`// Previous`
+`indicators.prev()`
 
-Compiled css and javascript files are output in build folder
-
-- app.min-{package.version}.js
-- app.min-{package.version}.css
-
-Package versoion number is appended to filename
+`// Set new items count`
+`indicators.setItems(4)`
