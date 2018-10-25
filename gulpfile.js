@@ -14,9 +14,9 @@ var babelify = require('babelify');
 var pkg = require('./package.json');
 
 var files = {
-    js: './assets/js/app.js',
-    less: './assets/less/app.less',
-    lesss: './assets/less/**/*.less',
+    js: './source/js/app.js',
+    less: './source/less/app.less',
+    lesss: './source/less/**/*.less',
     dest: './build'
 }
 
@@ -29,7 +29,9 @@ function getBrowserify(entry) {
         entries: [entry],
         // These params are for watchify
         cache: {}, 
-        packageCache: {}
+        packageCache: {},
+
+        standalone: 'webit.instagramSliderStyleIndicator'
     })
 }
 
@@ -51,7 +53,7 @@ function bundleJs(browserify, compress, firstRun) {
         console.log(er.annotated);
     }
 
-    var destFileName = 'app.min-'+pkg.version+'.js';
+    var destFileName = 'instagramsliderstyleindicators.min-'+pkg.version+'.js';
 
     var s = browserify;
 
@@ -95,7 +97,7 @@ function bundleLess(compress) {
                     console.log(er.filename+':'+er.line);
                 })
         )
-        .pipe(rename('app.min-'+pkg.version+'.css'))
+        .pipe(rename('instagramsliderstyleindicators.min-'+pkg.version+'.css'))
         .pipe(gulp.dest(files.dest));
 }
 
