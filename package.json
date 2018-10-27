@@ -3,6 +3,9 @@
   "main": "source/js/app.js",
   "version": "0.0.1",
   "private": false,
+  "browserify": {
+    "transform": [ "babelify" ]
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.3.0",
