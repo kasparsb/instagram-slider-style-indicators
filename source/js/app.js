@@ -5,13 +5,20 @@ import addItems from './addItems';
 import setActive from './setActive';
 import checkBoundries from './checkBoundries';
 
-function indicator(element, count) {
+function gv(obj, name, dv) {
+    if (obj && typeof obj[name] != 'undefined') {
+        return obj[name]
+    }
+    return dv
+}
+
+function indicator(element, count, conf) {
 
     this.element = element;
 
     this.activeIndex;
-    this.itemWidth = 8;
-    this.itemsSpacing = 5;
+    this.itemWidth = gv(conf, 'itemWidth', 8);
+    this.itemsSpacing = gv(conf, 'itemsSpacing', 5);
     this.width = this.itemWidth + this.itemsSpacing;
     // Max items skaits līdz, kura nenotiek vizuālā paginēšana
     this.maxItemsCountNoPaging = 5;
