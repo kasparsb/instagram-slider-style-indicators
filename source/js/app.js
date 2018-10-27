@@ -20,13 +20,21 @@ function indicator(element, count, conf) {
     this.itemWidth = gv(conf, 'itemWidth', 8);
     this.itemsSpacing = gv(conf, 'itemsSpacing', 5);
     this.width = this.itemWidth + this.itemsSpacing;
+    
+    // Kopējais items skaits ar pārejas elementiem
+    this.maxItemsCount = 7;
+    // Lapotā stilā pārejas items skaits
+    this.transitionItemsCount = 2;
+
     // Max items skaits līdz, kura nenotiek vizuālā paginēšana
-    this.maxItemsCountNoPaging = 5;
+    this.maxItemsCountNoPaging = this.maxItemsCount - this.transitionItemsCount;
+    
+
 
     this.items = [];
 
     addStyle(this.element, {
-        width: (7*this.width - this.itemsSpacing)+'px'
+        width: (this.maxItemsCount * this.width - this.itemsSpacing)+'px'
     })
 
     this.setItems(count);
@@ -42,7 +50,7 @@ indicator.prototype = {
 
         this.activeIndex = undefined;
 
-        this.items = addItems(count, this.width, this.maxItemsCountNoPaging);
+        this.items = addItems(count, this.width, this.maxItemsCount, this.maxItemsCountNoPaging);
         this.setActive(0)
     },
 

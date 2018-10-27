@@ -1,9 +1,9 @@
-function addItems(count, itemWidth, maxItemsCountNoPaging) {
+function addItems(count, itemWidth, maxItemsCount, maxItemsCountNoPaging) {
     let items = [];
 
     let x = itemWidth * 2;
     if (count <= maxItemsCountNoPaging) {
-        x = ((7*itemWidth) - (count*itemWidth))/2;
+        x = ((maxItemsCount * itemWidth) - (count*itemWidth))/2;
     }
     
     for (var i = 0; i < count; i++) {

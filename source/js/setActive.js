@@ -21,10 +21,10 @@ function setActive(index, currentIndex, items, itemWidth, maxItemsCountNoPaging)
                 if (Math.abs(currentIndex-index) > 2) {
                     // Daram tā, lai pirmie 3 elementi būtu bez nobīdes
                     if (index >= 0 && index < 3) {
-                        newX = (2 + index)*10
+                        newX = (2 + index)*itemWidth
                     }
                     if (index >= items.length-3 && index < items.length) {
-                        newX = (5 - (items.length - index))*10;
+                        newX = (maxItemsCountNoPaging - (items.length - index))*itemWidth;
                     }    
                 }
                 
