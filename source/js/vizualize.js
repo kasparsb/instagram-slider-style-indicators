@@ -1,37 +1,47 @@
 import addStyle from './addStyle';
 
-function vizualize(element, items, activeIndex, maxItemsCountNoPaging) {
-    var classes = [];
-
+function vizualize(element, items, activeIndex, maxItemsCount, maxItemsCountNoPaging, transitionItemsCount) {
+    
     for (var i = 0; i < items.length; i++) {
         
-        classes = ['indicator__item'];
+        let classes = ['indicator__item'];
         
         if (activeIndex == i) {
             classes.push('indicator__item--active');
         }
 
         if (items.length > maxItemsCountNoPaging) {
-            switch (items[i].visibleIndex) {
-                case 7-1:
-                    classes.push('indicator__item--last1');
-                    break;
-                case 7-2:
-                    classes.push('indicator__item--last2');
-                    break;
-                case 0:
-                    classes.push('indicator__item--first1');
-                    break;
-                case 1:
-                    classes.push('indicator__item--first2');
-                    break;
-                case 2:
-                case 3:
-                case 4:
-                    break;
-                default:
-                    classes.push('indicator__item--outside');
-                    break;
+
+            // Pārtaisām par 1based indeksu
+            let visibleIndex1 = items[i].visibleIndex + 1;
+
+            /**
+             * 1based index piemērs
+             *
+             *  outside     kreisi   redzamie    labi      outside
+             *  -1  0   ||  1  2  |  3  4  5  |  6  7  ||  8   9
+             *
+             */
+
+            // Pa kreisi
+            if (visibleIndex1 >= 1 && visibleIndex1 <= transitionItemsCount) {
+                classes.push('indicator__item--first'+visibleIndex1);
+            }
+
+            // Redzamie
+            else if (visibleIndex1 > transitionItemsCount && visibleIndex1 <= (maxItemsCount - transitionItemsCount)) {
+
+            }
+
+            // Pa labi
+            else if (visibleIndex1 > (maxItemsCount - transitionItemsCount) && visibleIndex1 <= maxItemsCount) {
+                // Pa labējais ir 1 un uz virzienā pa kreisi tas palielinās
+                classes.push('indicator__item--last'+((maxItemsCount - visibleIndex1)+1));
+            }
+
+            // outside
+            else {
+                classes.push('indicator__item--outside');
             }
         }
         

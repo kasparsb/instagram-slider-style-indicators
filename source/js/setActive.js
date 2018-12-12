@@ -1,41 +1,65 @@
-function isVisibleIndex(index) {
-    return index >= 2 && index <= 4;
+/**
+ * Nosakām vai padotais visibleIndex ir redzamajā daļā
+ * Redzams tas ir tad, kad tas nav transitionItemsCountā
+ * maxItemsCount un transitionItemsCount
+ * maxItemsCount veidojas šādi: maxItemsCount = transitionItemsCount + atlikušie + transitionItemsCount
+ * index jābūt atlikušie daļā, lai tas būtu visible
+ * 
+ * 1 2   3 4 5   6 7 - index 1based
+ * 0 1 | 2 3 4 | 5 6 - index 0based
+ * -----------------
+ * kopā 7 - maxItemsCount
+ * abās pusēs 2 - transitionItemsCount
+ * 0based index jābūt 2,3,4 tad tas būs vsible
+ * 1based index jābūt 3,4,5 tad tas būs vsible
+ */
+function isVisibleIndex(index, maxItemsCount, transitionItemsCount) {
+    // Pārejam no zero base uz 1 based
+    index = index + 1;
+
+    return index > transitionItemsCount && index <= (maxItemsCount-transitionItemsCount);
 }
 
-function setActive(index, currentIndex, items, itemWidth, maxItemsCountNoPaging) {
-    if (typeof currentIndex != 'undefined') {
-        
-        if (items.length > maxItemsCountNoPaging) {
-            let currentVisibleIndex = items[currentIndex].visibleIndex;
-            let newVisibleIndex = items[index].visibleIndex;
-            
-            if (isVisibleIndex(currentVisibleIndex) && isVisibleIndex(newVisibleIndex)) {
+function setActive(index, currentIndex, items, itemWidth, maxItemsCount, maxItemsCountNoPaging, transitionItemsCount) {
+    if (typeof currentIndex == 'undefined') {
+        return index;
+    }
+    // Items nav tik daudz, lai būt vajadzīga items pārbīdīšana
+    if (items.length <= maxItemsCountNoPaging) {
+        return index;
+    }
+    // Ja jaunais visibleIndex un esošais visibleIndex ir redzamajā daļā
+    if (isVisibleIndex(items[currentIndex].visibleIndex, maxItemsCount, transitionItemsCount) && isVisibleIndex(items[index].visibleIndex, maxItemsCount, transitionItemsCount)) {
+        return index;
+    }
 
-            }
-            else {
-                // Atrodam esošā aktīvā item x
-                let currentX = items[index].x;
-                let newX = index > currentIndex ? 4*itemWidth : 2*itemWidth;
-                
-                // Ja notiek secīga pārslēgšanās, tad netaisām piekoriģēšanu
-                if (Math.abs(currentIndex-index) > 2) {
-                    // Daram tā, lai pirmie 3 elementi būtu bez nobīdes
-                    if (index >= 0 && index < 3) {
-                        newX = (2 + index)*itemWidth
-                    }
-                    if (index >= items.length-3 && index < items.length) {
-                        newX = (maxItemsCountNoPaging - (items.length - index))*itemWidth;
-                    }    
-                }
-                
-                let delta = newX - currentX;
-                
-                for (let i = 0; i < items.length; i++) {
-                    items[i].x = items[i].x + delta;
-                    items[i].visibleIndex = items[i].x / itemWidth;
-                }
-            }
-        }
+    /**
+     * Šeit nosakām vai jaunā x pozīcija būs redzamo elementu sākumā vai beigās
+     *     x1    x2
+     * 0 1 | 2 3 4 | 5 6
+     *
+     * Ja index ir lielāks par currentIndex, tad tam jābūt x2 pozīcijā
+     * pretējā gadījumā x1
+     *
+     * Ja mēs esam nonākuši līdz šejienei, tad index atrodas ārpuse redzamās daļas
+     * tāpēc te ir jāizlemj, kur to nolikt, vai nu redzamās daļas sākumā vai beigās
+     * x1 - tā būt redzamās daļas sākuma
+     * x2 - būtu redzamās daļas beigas
+     */
+    let newX;
+    if (index > currentIndex) {
+        newX = itemWidth * (maxItemsCount - transitionItemsCount - 1)
+    }
+    else {
+        newX = itemWidth * transitionItemsCount
+    }
+
+    // Starpība starp jaunā index x pozīciju un pozīciju, kur tam ir jābūt
+    let delta = newX - items[index].x;
+    
+    for (let i = 0; i < items.length; i++) {
+        items[i].x = items[i].x + delta;
+        items[i].visibleIndex = items[i].x / itemWidth;
     }
     
     return index;

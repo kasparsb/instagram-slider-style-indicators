@@ -5,6 +5,10 @@ import addItems from './addItems';
 import setActive from './setActive';
 import checkBoundries from './checkBoundries';
 
+/**
+ * Get property from object by property name.
+ * If property not defined return default value
+ */
 function gv(obj, name, dv) {
     if (obj && typeof obj[name] != 'undefined') {
         return obj[name]
@@ -22,9 +26,9 @@ function indicator(element, count, conf) {
     this.width = this.itemWidth + this.itemsSpacing;
     
     // Kopējais items skaits ar pārejas elementiem
-    this.maxItemsCount = 7;
+    this.maxItemsCount = gv(conf, 'maxItemsCount', 7);
     // Lapotā stilā pārejas items skaits
-    this.transitionItemsCount = 2;
+    this.transitionItemsCount = gv(conf, 'transitionItemsCount', 2);
 
     // Max items skaits līdz, kura nenotiek vizuālā paginēšana
     this.maxItemsCountNoPaging = this.maxItemsCount - this.transitionItemsCount;
@@ -42,7 +46,7 @@ function indicator(element, count, conf) {
 
 indicator.prototype = {
     vizualize() {
-        vizualize(this.element, this.items, this.activeIndex, this.maxItemsCountNoPaging)
+        vizualize(this.element, this.items, this.activeIndex, this.maxItemsCount, this.maxItemsCountNoPaging, this.transitionItemsCount)
     },
 
     setItems(count) {
@@ -50,7 +54,7 @@ indicator.prototype = {
 
         this.activeIndex = undefined;
 
-        this.items = addItems(count, this.width, this.maxItemsCount, this.maxItemsCountNoPaging);
+        this.items = addItems(count, this.width, this.maxItemsCount, this.maxItemsCountNoPaging, this.transitionItemsCount);
         this.setActive(0)
     },
 
@@ -59,7 +63,8 @@ indicator.prototype = {
     },
 
     setActive(index) {
-        this.activeIndex = setActive(this.validateIndex(index), this.activeIndex, this.items, this.width, this.maxItemsCountNoPaging);
+        index = parseInt(index, 10);
+        this.activeIndex = setActive(this.validateIndex(index), this.activeIndex, this.items, this.width, this.maxItemsCount, this.maxItemsCountNoPaging, this.transitionItemsCount);
         this.vizualize();
     },
 
