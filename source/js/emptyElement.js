@@ -6,4 +6,4 @@ function emptyElement(el) {
     return el;
 }
 
-export default emptyElement;
+module.exports = emptyElement;

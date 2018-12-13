@@ -33,4 +33,4 @@ function addItems(count, itemWidth, maxItemsCount, maxItemsCountNoPaging, transi
     return items;
 }
 
-export default addItems;
+module.exports = addItems;

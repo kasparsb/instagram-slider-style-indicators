@@ -1,9 +1,9 @@
-import addStyle from './addStyle';
-import emptyElement from './emptyElement';
-import vizualize from './vizualize';
-import addItems from './addItems';
-import setActive from './setActive';
-import checkBoundries from './checkBoundries';
+var addStyle = require('./addStyle');
+var emptyElement = require('./emptyElement');
+var vizualize = require('./vizualize');
+var addItems = require('./addItems');
+var setActive = require('./setActive');
+var checkBoundries = require('./checkBoundries');
 
 /**
  * Get property from object by property name.

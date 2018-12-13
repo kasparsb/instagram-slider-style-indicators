@@ -1,4 +1,4 @@
-import addStyle from './addStyle';
+var addStyle = require('./addStyle');
 
 function vizualize(element, items, activeIndex, maxItemsCount, maxItemsCountNoPaging, transitionItemsCount) {
     
@@ -58,4 +58,4 @@ function vizualize(element, items, activeIndex, maxItemsCount, maxItemsCountNoPa
     }
 }
 
-export default vizualize
+module.exports = vizualize

@@ -65,4 +65,4 @@ function setActive(index, currentIndex, items, itemWidth, maxItemsCount, maxItem
     return index;
 }
 
-export default setActive
+module.exports = setActive

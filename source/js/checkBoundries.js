@@ -9,4 +9,4 @@ function checkBoundries(x, topBoundry, bottomBoundry) {
     return x;
 }
 
-export default checkBoundries;
+module.exports = checkBoundries;
