@@ -1,5 +1,5 @@
 function addItems(count, itemWidth, maxItemsCount, maxItemsCountNoPaging, transitionItemsCount) {
-    let items = [];
+    var items = [];
 
     /**
      * x pozīcija sākas nevis no pašas kreisās puses, bet no 
@@ -7,7 +7,7 @@ function addItems(count, itemWidth, maxItemsCount, maxItemsCountNoPaging, transi
      * Tas ir, atstāja pa kreisi no pirmā elementa vietu 2 itemiem
      * Tie ir transition items, kuri ir mazāk, rāda it kā pāreju
      */
-    let x = transitionItemsCount * itemWidth;
+    var x = transitionItemsCount * itemWidth;
 
     /**
      * Ja vēlamais items skaits ir mazāks par to skaitu,

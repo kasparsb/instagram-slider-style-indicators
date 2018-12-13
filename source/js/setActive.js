@@ -46,7 +46,7 @@ function setActive(index, currentIndex, items, itemWidth, maxItemsCount, maxItem
      * x1 - tā būt redzamās daļas sākuma
      * x2 - būtu redzamās daļas beigas
      */
-    let newX;
+    var newX;
     if (index > currentIndex) {
         newX = itemWidth * (maxItemsCount - transitionItemsCount - 1)
     }
@@ -55,9 +55,9 @@ function setActive(index, currentIndex, items, itemWidth, maxItemsCount, maxItem
     }
 
     // Starpība starp jaunā index x pozīciju un pozīciju, kur tam ir jābūt
-    let delta = newX - items[index].x;
+    var delta = newX - items[index].x;
     
-    for (let i = 0; i < items.length; i++) {
+    for (var i = 0; i < items.length; i++) {
         items[i].x = items[i].x + delta;
         items[i].visibleIndex = items[i].x / itemWidth;
     }

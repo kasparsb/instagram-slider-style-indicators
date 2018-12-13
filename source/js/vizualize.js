@@ -4,7 +4,7 @@ function vizualize(element, items, activeIndex, maxItemsCount, maxItemsCountNoPa
     
     for (var i = 0; i < items.length; i++) {
         
-        let classes = ['indicator__item'];
+        var classes = ['indicator__item'];
         
         if (activeIndex == i) {
             classes.push('indicator__item--active');
@@ -13,7 +13,7 @@ function vizualize(element, items, activeIndex, maxItemsCount, maxItemsCountNoPa
         if (items.length > maxItemsCountNoPaging) {
 
             // Pārtaisām par 1based indeksu
-            let visibleIndex1 = items[i].visibleIndex + 1;
+            var visibleIndex1 = items[i].visibleIndex + 1;
 
             /**
              * 1based index piemērs

@@ -45,11 +45,11 @@ function indicator(element, count, conf) {
 }
 
 indicator.prototype = {
-    vizualize() {
+    vizualize: function() {
         vizualize(this.element, this.items, this.activeIndex, this.maxItemsCount, this.maxItemsCountNoPaging, this.transitionItemsCount)
     },
 
-    setItems(count) {
+    setItems: function(count) {
         emptyElement(this.element);
 
         this.activeIndex = undefined;
@@ -58,21 +58,21 @@ indicator.prototype = {
         this.setActive(0)
     },
 
-    validateIndex(index) {
+    validateIndex: function(index) {
         return checkBoundries(index, this.items.length-1, 0);
     },
 
-    setActive(index) {
+    setActive: function(index) {
         index = parseInt(index, 10);
         this.activeIndex = setActive(this.validateIndex(index), this.activeIndex, this.items, this.width, this.maxItemsCount, this.maxItemsCountNoPaging, this.transitionItemsCount);
         this.vizualize();
     },
 
-    next() {
+    next: function() {
         this.setActive(this.activeIndex + 1);
     },
 
-    prev() {
+    prev: function() {
         this.setActive(this.activeIndex - 1);
     }
 }
