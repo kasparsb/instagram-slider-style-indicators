@@ -1,13 +1,13 @@
-function addItems(count, itemWidth, maxItemsCount, maxItemsCountNoPaging, transitionItemsCount) {
-    var items = [];
+export default function (count, itemWidth, maxItemsCount, maxItemsCountNoPaging, transitionItemsCount) {
+    let items = [];
 
     /**
-     * x pozīcija sākas nevis no pašas kreisās puses, bet no 
+     * x pozīcija sākas nevis no pašas kreisās puses, bet no
      * transitionItemsCount * itemWidth
      * Tas ir, atstāja pa kreisi no pirmā elementa vietu 2 itemiem
      * Tie ir transition items, kuri ir mazāk, rāda it kā pāreju
      */
-    var x = transitionItemsCount * itemWidth;
+    let x = transitionItemsCount * itemWidth;
 
     /**
      * Ja vēlamais items skaits ir mazāks par to skaitu,
@@ -19,8 +19,8 @@ function addItems(count, itemWidth, maxItemsCount, maxItemsCountNoPaging, transi
     if (count <= maxItemsCountNoPaging) {
         x = ((maxItemsCount * itemWidth) - (count * itemWidth))/2;
     }
-    
-    for (var i = 0; i < count; i++) {
+
+    for (let i = 0; i < count; i++) {
 
         items.push({
             x: x,
@@ -32,5 +32,3 @@ function addItems(count, itemWidth, maxItemsCount, maxItemsCountNoPaging, transi
 
     return items;
 }
-
-module.exports = addItems;

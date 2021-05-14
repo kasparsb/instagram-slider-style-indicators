@@ -1,11 +1,11 @@
-var addStyle = require('./addStyle');
+import addStyle from 'dom-helpers/src/addStyle';
 
-function vizualize(element, items, activeIndex, maxItemsCount, maxItemsCountNoPaging, transitionItemsCount) {
-    
+export default function(element, items, activeIndex, maxItemsCount, maxItemsCountNoPaging, transitionItemsCount) {
+
     for (var i = 0; i < items.length; i++) {
-        
+
         var classes = ['indicator__item'];
-        
+
         if (activeIndex == i) {
             classes.push('indicator__item--active');
         }
@@ -44,7 +44,7 @@ function vizualize(element, items, activeIndex, maxItemsCount, maxItemsCountNoPa
                 classes.push('indicator__item--outside');
             }
         }
-        
+
         if (typeof items[i].el == 'undefined') {
             items[i].el = document.createElement('a');
             element.appendChild(items[i].el);
@@ -57,5 +57,3 @@ function vizualize(element, items, activeIndex, maxItemsCount, maxItemsCountNoPa
         items[i].el.className = classes.join(' ');
     }
 }
-
-module.exports = vizualize

@@ -1,4 +1,4 @@
-function checkBoundries(x, topBoundry, bottomBoundry) {
+export default function(x, topBoundry, bottomBoundry) {
     if (x > topBoundry) {
         x = topBoundry;
     }
@@ -8,5 +8,3 @@ function checkBoundries(x, topBoundry, bottomBoundry) {
 
     return x;
 }
-
-module.exports = checkBoundries;

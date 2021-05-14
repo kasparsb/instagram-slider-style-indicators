@@ -4,7 +4,7 @@
  * maxItemsCount un transitionItemsCount
  * maxItemsCount veidojas šādi: maxItemsCount = transitionItemsCount + atlikušie + transitionItemsCount
  * index jābūt atlikušie daļā, lai tas būtu visible
- * 
+ *
  * 1 2   3 4 5   6 7 - index 1based
  * 0 1 | 2 3 4 | 5 6 - index 0based
  * -----------------
@@ -56,13 +56,13 @@ function setActive(index, currentIndex, items, itemWidth, maxItemsCount, maxItem
 
     // Starpība starp jaunā index x pozīciju un pozīciju, kur tam ir jābūt
     var delta = newX - items[index].x;
-    
+
     for (var i = 0; i < items.length; i++) {
         items[i].x = items[i].x + delta;
         items[i].visibleIndex = items[i].x / itemWidth;
     }
-    
+
     return index;
 }
 
-module.exports = setActive
+export default setActive
