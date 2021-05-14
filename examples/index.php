@@ -8,7 +8,7 @@ $version = $pkg->version;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
     <title>Instagram style indicators</title>
-    <link rel="stylesheet" href="../build/instagramsliderstyleindicators.min-<?php echo $version ?>.css" type='text/css' media='all' />
+    <link rel="stylesheet" href="../build/app.min-<?php echo $version ?>.css" type='text/css' media='all' />
     <style>
     .indicator {
         overflow: hidden;
@@ -55,11 +55,11 @@ $version = $pkg->version;
             </select>
         </div>
     </div>
-    
-    <script src="../build/instagramsliderstyleindicators.min-<?php echo $version ?>.js"></script>
+
+    <script src="../build/app.min-<?php echo $version ?>.js"></script>
     <script>
-        
-        let api = new webit.instagramSliderStyleIndicator(document.querySelector('.indicator'), 20, {
+
+        let api = new webit.instagramSliderStyleIndicator.default(document.querySelector('.indicator'), 20, {
             transitionItemsCount: 1,
             maxItemsCount: 4
         });
